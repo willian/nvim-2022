@@ -64,6 +64,7 @@ keymap('v', '>', '>gv', opts)
 -- NvimTree
 keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<C-b>', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<D-S-b>', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<C-S-e>', ':NvimTreeFocus<CR>', opts)
 
 -- Telescope

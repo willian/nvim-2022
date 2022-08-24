@@ -46,6 +46,7 @@ dashboard.section.buttons.val = {
   button('q', icons.ui.SignOut .. ' Quit', ':qa<CR>'),
 }
 
+---@diagnostic disable-next-line: assign-type-mismatch
 dashboard.section.footer.val = os.date()
 
 dashboard.section.footer.opts.hl = 'DashboardFooter'
