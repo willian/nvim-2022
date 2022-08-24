@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-parameter
 local fn = vim.fn
 
 -- Automatically install packer
@@ -37,35 +38,35 @@ return packer.startup(function(use)
   -- Plugins dependencies
   use({ 'lewis6991/impatient.nvim' })
   use({ 'nvim-lua/plenary.nvim' })
+  use({ 'christianchiarulli/lua-dev.nvim' })
 
-  -- Common plugins
+  -- General plugins
   use({ 'JoosepAlviste/nvim-ts-context-commentstring' })
   use({ 'ahmedkhalf/project.nvim' })
   use({ 'akinsho/bufferline.nvim' })
   use({ 'akinsho/toggleterm.nvim' })
+  use({ 'andymass/vim-matchup' })
   use({ 'dstein64/vim-startuptime' })
+  use({ 'f-person/git-blame.nvim' })
   use({ 'folke/todo-comments.nvim' })
   use({ 'folke/which-key.nvim' })
-  use({ 'github/copilot.vim' })
   use({ 'goolord/alpha-nvim' })
   use({ 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } })
+  use({ 'kylechui/nvim-surround' })
   use({ 'lukas-reineke/indent-blankline.nvim' })
+  use({ 'mattn/vim-gist' })
   use({ 'moll/vim-bbye' })
+  use({ 'nacro90/numb.nvim' })
   use({ 'numToStr/Comment.nvim' })
   use({ 'nvim-lualine/lualine.nvim' })
-  -- use({ 'windwp/nvim-autopairs' })
+  use({ 'rcarriga/nvim-notify' })
+  use({ 'windwp/nvim-autopairs' })
+  -- use({ 'stevearc/dressing.nvim' })
+  -- use({ 'github/copilot.vim' })
 
   -- Colorschemes
   use({ 'Julpikar/night-owl.nvim' })
   use({ 'bluz71/vim-nightfly-guicolors' })
-
-  -- cmp plugins
-  use({ 'hrsh7th/nvim-cmp' })
-  use({ 'hrsh7th/cmp-buffer' }) -- buffer completions
-  use({ 'hrsh7th/cmp-nvim-lsp' })
-  use({ 'hrsh7th/cmp-nvim-lua' })
-  use({ 'hrsh7th/cmp-path' }) -- path completions
-  use({ 'saadparwaiz1/cmp_luasnip' }) -- snippet completions
 
   -- Snippets
   use({ 'L3MON4D3/LuaSnip' })
@@ -73,25 +74,62 @@ return packer.startup(function(use)
 
   -- LSP
   use({ 'neovim/nvim-lspconfig' })
-  use({ 'williamboman/nvim-lsp-installer' })
-  --[[ use({ 'williamboman/mason.nvim' }) ]]
-  --[[ use({ 'williamboman/mason-lspconfig.nvim' }) ]]
+  use({ 'williamboman/mason.nvim' })
+  use({ 'williamboman/mason-lspconfig.nvim' })
   use({ 'jose-elias-alvarez/null-ls.nvim' }) -- for formatters and linters
-  --[[ use({ 'ray-x/lsp_signature.nvim' }) ]]
-  --[[ use({ 'SmiteshP/nvim-navic' }) -- substitues bufferline and lualine ]]
-  --[[ use({ 'b0o/SchemaStore.nvim' }) ]]
+  use({ 'ray-x/lsp_signature.nvim' })
+  use({ 'SmiteshP/nvim-navic' }) -- substitues bufferline and lualine
+  use({ 'b0o/SchemaStore.nvim' })
   use({ 'j-hui/fidget.nvim' }) -- UI for nvim-lsp progress
   use({ 'RRethy/vim-illuminate' })
-  use({ 'princejoogie/tailwind-highlight.nvim' })
+  -- use({ 'princejoogie/tailwind-highlight.nvim' })
+  use({ 'lvimuser/lsp-inlayhints.nvim' })
+  use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
+  use({
+    'zbirenbaum/copilot.lua',
+    event = { 'VimEnter' },
+    config = function()
+      vim.defer_fn(function()
+        require('nvim.plugins.copilot')
+      end, 100)
+    end,
+  })
+
+  -- Completion
+  use({ 'hrsh7th/nvim-cmp' })
+  use({ 'hrsh7th/cmp-buffer' }) -- buffer completions
+  use({ 'hrsh7th/cmp-cmdline' }) -- cmdline completions
+  use({ 'hrsh7th/cmp-emoji' })
+  use({ 'hrsh7th/cmp-nvim-lsp' })
+  use({ 'hrsh7th/cmp-nvim-lua' })
+  use({ 'hrsh7th/cmp-path' }) -- path completions
+  use({ 'saadparwaiz1/cmp_luasnip' }) -- snippet completions
+  -- use({
+  --   'tzachar/cmp-tabnine',
+  --   commit = '1a8fd2795e4317fd564da269cc64a2fa17ee854e',
+  --   run = './install.sh',
+  -- })
+  use({ 'zbirenbaum/copilot-cmp' })
 
   -- Telescope
   use({ 'nvim-telescope/telescope.nvim' })
 
   -- Treesitter
   use({ 'nvim-treesitter/nvim-treesitter' })
+  use({
+    'abecodes/tabout.nvim',
+    wants = { 'nvim-treesitter' }, -- or require if not used so far
+  })
 
   -- Git
   use({ 'lewis6991/gitsigns.nvim' })
+
+  -- -- Session
+  -- use({ 'rmagatti/auto-session' })
+  -- use({ 'rmagatti/session-lens' })
+
+  -- Color
+  use({ 'NvChad/nvim-colorizer.lua' })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

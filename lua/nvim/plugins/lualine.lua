@@ -1,13 +1,14 @@
+---@diagnostic disable: missing-parameter
 local status_ok, lualine = pcall(require, 'lualine')
 if not status_ok then
   return
 end
 
 local colors = {
-  bg = '#122934',
-  yellow = '#FFCB8B',
-  green = '#D6F882',
-  red = '#F08869',
+  bg = '#1D3B53',
+  yellow = '#E3D18A',
+  green = '#A1CD5E',
+  red = '#FC514E',
 }
 
 local hide_in_width = function()
@@ -36,7 +37,7 @@ local mode = {
 
 local branch = {
   'b:gitsigns_head',
-  icon = ' ',
+  icon = '',
   color = { gui = 'bold' },
   cond = hide_in_width,
 }

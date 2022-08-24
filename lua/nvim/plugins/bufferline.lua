@@ -1,8 +1,10 @@
+---@diagnostic disable: assign-type-mismatch
 local status_ok, bufferline = pcall(require, 'bufferline')
 if not status_ok then
   return
 end
 
+local icons = require('nvim.core.icons')
 local use_icons = true
 
 local function is_ft(b, ft)
@@ -12,7 +14,11 @@ end
 local function diagnostics_indicator(num, _, diagnostics, _)
   local table_result = {}
   local result = ''
-  local symbols = { error = '', warning = '', info = '' }
+  local symbols = {
+    error = icons.diagnostics.Error,
+    warning = icons.diagnostics.Warning,
+    info = icons.diagnostics.Information,
+  }
 
   if not use_icons then
     return '(' .. num .. ')'
@@ -52,62 +58,45 @@ end
 
 bufferline.setup({
   options = {
-    numbers = 'none', -- can be "none" | "ordinal" | "buffer_id" | "both" | function
-    close_command = 'bdelete! %d', -- can be a string | function, see "Mouse actions"
-    right_mouse_command = 'vert sbuffer %d', -- can be a string | function, see "Mouse actions"
+    numbers = 'none', -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+    close_command = 'Bdelete! %d', -- can be a string | function, see "Mouse actions"
+    right_mouse_command = 'Bdelete! %d', -- can be a string | function, see "Mouse actions"
     left_mouse_command = 'buffer %d', -- can be a string | function, see "Mouse actions"
     middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     -- NOTE: this plugin is designed with this icon in mind,
     -- and so changing this is NOT recommended, this is intended
     -- as an escape hatch for people who cannot bear it for whatever reason
-    indcator = {
-      icon = '▎',
+    indicator = {
+      icon = icons.ui.bufferline.Indicator,
       style = 'icon',
     },
-    buffer_close_icon = '',
-    modified_icon = '●',
-    close_icon = '',
-    left_trunc_marker = '',
-    right_trunc_marker = '',
+    buffer_close_icon = icons.ui.Close,
+    modified_icon = icons.ui.bufferline.Modified,
+    close_icon = icons.ui.bufferline.Close,
+    left_trunc_marker = icons.ui.bufferline.LeftTrunc,
+    right_trunc_marker = icons.ui.bufferline.RightTrunc,
     --- name_formatter can be used to change the buffer's label in the bufferline.
-    --- Please note some names can/will break the bufferline so use this at your discretion knowingthat
-    -- that it has some limitations that will *NOT* be fixed.
-    name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
-      -- remove extension from markdown files for examples
-      if buf.name:match('%.md') then
-        return vim.fn.fnamemodify(buf.name, ':t:r')
-      end
-    end,
-    max_name_length = 18,
-    max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-    tab_size = 18,
-    diagnostics = 'nvim_lsp',
+    --- Please note some names can/will break the bufferline so use this at your discretion knowing
+    --that it has some limitations that will *NOT* be fixed.
+    -- name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
+    --   -- remove extension from markdown files for example
+    --   if buf.name:match('%.md') then
+    --     return vim.fn.fnamemodify(buf.name, ':t:r')
+    --   end
+    -- end,
+    max_name_length = 30,
+    max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
+    tab_size = 21,
+    diagnostics = 'nvim_lsp', -- | "coc" | false
     diagnostics_update_in_insert = false,
     diagnostics_indicator = diagnostics_indicator,
-    -- NOTE: this will be called a lot so don't do any heavy processing hereby
+    -- NOTE: this will be called a lot so don't do any heavy processing here
     custom_filter = custom_filter,
     offsets = {
-      {
-        filetype = 'undotree',
-        text = 'Undotree',
-        highlight = 'PanelHeading',
-        padding = 1,
-      },
       {
         filetype = 'NvimTree',
         text = '',
         padding = 1,
-      },
-      {
-        filetype = 'DiffviewFiles',
-        text = 'Diff View',
-        highlight = 'PanelHeading',
-        padding = 1,
-      },
-      {
-        filetype = 'flutterToolsOutline',
-        text = 'Flutter Outline',
-        highlight = 'PanelHeading',
       },
       {
         filetype = 'packer',
@@ -116,17 +105,20 @@ bufferline.setup({
         padding = 1,
       },
     },
-    show_buffer_icons = use_icons, -- disable filetype icons for buffers
+    show_buffer_icons = use_icons,
     show_buffer_close_icons = use_icons,
     show_close_icon = false,
     show_tab_indicators = true,
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = 'thin',
-    enforce_regular_tabs = false,
-    always_show_bufferline = false,
-    sort_by = 'id',
+    separator_style = 'thin', -- | "thick" | "thin" | { 'any', 'any' },
+    enforce_regular_tabs = true,
+    always_show_bufferline = true,
+    -- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+    --   -- add custom logic
+    --   return buffer_a.modified > buffer_b.modified
+    -- end
   },
   highlights = {
     background = {

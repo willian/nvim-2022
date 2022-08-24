@@ -13,8 +13,13 @@ indent_blankline.setup({
   buftype_exclude = { 'terminal', 'nofile' },
   filetype_exclude = {
     'help',
-    'packer',
+    'alpha',
     'NvimTree',
+    'packer',
+    'toggleterm',
+    'DressingSelect',
+    'TelescopePrompt',
+    'text',
   },
   context_highlight_list = { 'SpecialKey', 'Operator', 'Statement' },
 })
