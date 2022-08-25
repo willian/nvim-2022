@@ -81,6 +81,7 @@ return packer.startup(function(use)
   use({ 'williamboman/mason-lspconfig.nvim' })
   use({ 'jose-elias-alvarez/null-ls.nvim' }) -- for formatters and linters
   use({ 'ray-x/lsp_signature.nvim' })
+  use({ 'glepnir/lspsaga.nvim' })
   use({ 'b0o/SchemaStore.nvim' })
   use({ 'j-hui/fidget.nvim' }) -- UI for nvim-lsp progress
   use({ 'RRethy/vim-illuminate' })

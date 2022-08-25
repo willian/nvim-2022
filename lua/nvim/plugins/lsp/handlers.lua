@@ -58,18 +58,20 @@ local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
   keymap(bufnr, 'n', 'gD', '<cmd>Telescope lsp_declarations<CR>', opts)
-  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  keymap(bufnr, 'n', 'K', '<cmd>Lspsaga hover_doc<CR>', opts)
   keymap(bufnr, 'n', 'gI', '<cmd>Telescope lsp_implementations<CR>', opts)
   keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  keymap(bufnr, 'n', 'gl', '<cmd>Lspsaga show_cursor_diagnostics<CR>', opts)
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  keymap(bufnr, 'n', '[e', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
+  keymap(bufnr, 'n', ']e', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
   keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
   keymap(bufnr, 'n', '<leader>li', '<cmd>LspInfo<cr>', opts)
   keymap(bufnr, 'n', '<leader>lM', '<cmd>Mason<cr>', opts)
-  keymap(bufnr, 'n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lk', '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  keymap(bufnr, 'n', '<leader>la', '<cmd>Lspsaga code_action<cr>', opts)
+  keymap(bufnr, 'n', '<leader>lj', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
+  keymap(bufnr, 'n', '<leader>lk', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
+  keymap(bufnr, 'n', '<leader>lr', '<cmd>Lspsaga rename<cr>', opts)
   keymap(bufnr, 'n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 end
@@ -78,7 +80,20 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
   if client.name == 'tsserver' then
-    require('lsp-inlayhints').on_attach(bufnr, client)
+    local status_lsp_inlayhints, lsp_inlayhints = pcall(require, 'lsp-inlayhints')
+    if not status_lsp_inlayhints then
+      return
+    end
+
+    lsp_inlayhints.on_attach(client, bufnr)
+
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+
+  if client.name == 'sumneko_lua' then
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
   end
 end
 

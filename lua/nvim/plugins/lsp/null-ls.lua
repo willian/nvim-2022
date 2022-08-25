@@ -17,7 +17,7 @@ null_ls.setup({
     formatting.eslint_d,
     -- formatting.prettier,
     formatting.black.with({ extra_args = { '--fast' } }),
-    -- formatting.stylua,
+    formatting.stylua,
   },
   ---@diagnostic disable-next-line: unused-local
   on_attach = function(client, _bufnr)
