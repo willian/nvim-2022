@@ -87,7 +87,7 @@ return packer.startup(function(use)
   use({ 'RRethy/vim-illuminate' })
   -- use({ 'princejoogie/tailwind-highlight.nvim' })
   use({ 'lvimuser/lsp-inlayhints.nvim' })
-  use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
+  -- use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
   use({
     'zbirenbaum/copilot.lua',
     event = { 'VimEnter' },

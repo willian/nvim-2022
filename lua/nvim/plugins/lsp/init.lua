@@ -33,11 +33,11 @@ require('nvim.plugins.lsp.mason')
 require('nvim.plugins.lsp.handlers')
 require('nvim.plugins.lsp.null-ls')
 
-local l_status_ok, lsp_lines = pcall(require, 'lsp_lines')
-if not l_status_ok then
-  return
-end
-
-lsp_lines.setup()
+-- local l_status_ok, lsp_lines = pcall(require, 'lsp_lines')
+-- if not l_status_ok then
+--   return
+-- end
+--
+-- lsp_lines.setup()
 
 return M
