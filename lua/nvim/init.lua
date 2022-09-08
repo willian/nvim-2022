@@ -32,6 +32,7 @@ require('nvim.plugins.telescope')
 require('nvim.plugins.todo-comments')
 require('nvim.plugins.toggleterm')
 require('nvim.plugins.treesitter')
+require('nvim.plugins.treesitter-context')
 require('nvim.plugins.which-key')
 -- TODO: Enable this once Neovim > 0.8 is available
 -- require('nvim.plugins.lsp-inlayhints')
