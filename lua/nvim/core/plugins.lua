@@ -123,6 +123,7 @@ return packer.startup(function(use)
     'abecodes/tabout.nvim',
     wants = { 'nvim-treesitter' }, -- or require if not used so far
   })
+  use({ 'nvim-treesitter/nvim-treesitter-context' })
 
   -- Git
   use({ 'lewis6991/gitsigns.nvim' })
