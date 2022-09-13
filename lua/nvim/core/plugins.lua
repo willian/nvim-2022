@@ -70,6 +70,7 @@ return packer.startup(function(use)
   -- Colorschemes
   use({ 'Julpikar/night-owl.nvim' })
   use({ 'bluz71/vim-nightfly-guicolors' })
+  use({ 'folke/tokyonight.nvim' })
 
   -- Snippets
   use({ 'L3MON4D3/LuaSnip' })
