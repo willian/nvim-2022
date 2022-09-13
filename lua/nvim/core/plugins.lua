@@ -112,7 +112,15 @@ return packer.startup(function(use)
   --   commit = '1a8fd2795e4317fd564da269cc64a2fa17ee854e',
   --   run = './install.sh',
   -- })
-  use({ 'zbirenbaum/copilot-cmp' })
+  use({
+    'zbirenbaum/copilot-cmp',
+    after = { 'copilot.lua' },
+    config = function()
+      require('copilot_cmp').setup({
+        method = 'getCompletionsCycling',
+      })
+    end,
+  })
 
   -- Telescope
   use({ 'nvim-telescope/telescope.nvim' })
