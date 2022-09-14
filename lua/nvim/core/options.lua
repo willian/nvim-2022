@@ -14,6 +14,8 @@ vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.iskeyword:append('-')
 vim.opt.laststatus = 3
+vim.opt.list = true -- show some invisible characters (tabs...)
+vim.opt.listchars = { tab = '▸ ', trail = '·', extends = '>', precedes = '<', nbsp = '␣' }
 vim.opt.mouse = 'a' -- allow the mouse to be used in neovim
 vim.opt.number = true -- set numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 4
