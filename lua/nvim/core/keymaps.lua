@@ -59,6 +59,20 @@ keymap('i', 'jk', '<ESC>', opts)
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
+-- Command --
+keymap('c', 'Q', 'q', opts)
+keymap('c', 'W', 'w', opts)
+keymap('c', 'WA', 'wa', opts)
+keymap('c', 'WQ', 'wq', opts)
+keymap('c', 'wQ', 'wq', opts)
+keymap('c', 'WQA', 'wqa', opts)
+keymap('c', 'Wqa', 'wqa', opts)
+keymap('c', 'wQA', 'wqa', opts)
+keymap('c', 'WQa', 'wqa', opts)
+keymap('c', 'Wa', 'wa', opts)
+keymap('c', 'Wq', 'wq', opts)
+keymap('c', 'X', 'x', opts)
+
 -- Plugins
 
 -- NvimTree
