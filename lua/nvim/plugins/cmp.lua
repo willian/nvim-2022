@@ -26,7 +26,19 @@ end
 
 local compare = require('cmp.config.compare')
 
-require('luasnip/loaders/from_vscode').lazy_load()
+require('luasnip.loaders.from_vscode').lazy_load({
+  paths = {
+    os.getenv('HOME') .. '/.local/share/nvim/site/pack/packer/start/friendly-snippets',
+    os.getenv('HOME') .. '/.config/nvim/my_snippets',
+  },
+})
+
+luasnip.filetype_extend('typescript', { 'javascript' })
+luasnip.filetype_extend(
+  'typescriptreact',
+  { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' }
+)
+luasnip.filetype_extend('javascriptreact', { 'javascript', 'javascriptreact' })
 
 local check_backspace = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -97,7 +109,6 @@ cmp.setup({
       elseif luasnip.expandable() then
         luasnip.expand()
       elseif check_backspace() then
-        -- cmp.complete()
         fallback()
       else
         fallback()
@@ -142,9 +153,10 @@ cmp.setup({
 
       -- NOTE: order matters
       vim_item.menu = ({
+        copilot = '',
         nvim_lsp = '',
-        nvim_lua = '',
         luasnip = '',
+        nvim_lua = '',
         buffer = '',
         path = '',
         emoji = '',
@@ -199,8 +211,8 @@ cmp.setup({
       end,
       group_index = 2,
     },
-    { name = 'nvim_lua', group_index = 2 },
     { name = 'luasnip', group_index = 2 },
+    { name = 'nvim_lua', group_index = 2 },
     {
       name = 'buffer',
       group_index = 2,

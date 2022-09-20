@@ -82,7 +82,8 @@ _G.packer_plugins = {
   LuaSnip = {
     loaded = true,
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/LuaSnip",
-    url = "https://github.com/L3MON4D3/LuaSnip"
+    url = "https://github.com/L3MON4D3/LuaSnip",
+    wants = { "friendly-snippets" }
   },
   ["SchemaStore.nvim"] = {
     loaded = true,
@@ -218,11 +219,6 @@ _G.packer_plugins = {
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  ["night-owl.nvim"] = {
-    loaded = true,
-    path = "/Users/willian/.local/share/nvim/site/pack/packer/start/night-owl.nvim",
-    url = "https://github.com/Julpikar/night-owl.nvim"
-  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -298,6 +294,11 @@ _G.packer_plugins = {
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["prettier.nvim"] = {
+    loaded = true,
+    path = "/Users/willian/.local/share/nvim/site/pack/packer/start/prettier.nvim",
+    url = "https://github.com/MunifTanjim/prettier.nvim"
+  },
   ["project.nvim"] = {
     loaded = true,
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/project.nvim",
@@ -348,11 +349,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/vim-matchup",
     url = "https://github.com/andymass/vim-matchup"
-  },
-  ["vim-nightfly-guicolors"] = {
-    loaded = true,
-    path = "/Users/willian/.local/share/nvim/site/pack/packer/start/vim-nightfly-guicolors",
-    url = "https://github.com/bluz71/vim-nightfly-guicolors"
   },
   ["vim-repeat"] = {
     loaded = true,

@@ -68,13 +68,9 @@ return packer.startup(function(use)
   -- use({ 'github/copilot.vim' })
 
   -- Colorschemes
-  use({ 'Julpikar/night-owl.nvim' })
-  use({ 'bluz71/vim-nightfly-guicolors' })
+  -- use({ 'Julpikar/night-owl.nvim' })
+  -- use({ 'bluz71/vim-nightfly-guicolors' })
   use({ 'folke/tokyonight.nvim' })
-
-  -- Snippets
-  use({ 'L3MON4D3/LuaSnip' })
-  use({ 'rafamadriz/friendly-snippets' })
 
   -- LSP
   use({ 'neovim/nvim-lspconfig' })
@@ -98,9 +94,12 @@ return packer.startup(function(use)
       end, 100)
     end,
   })
+  use({ 'MunifTanjim/prettier.nvim' })
 
   -- Completion
-  use({ 'hrsh7th/nvim-cmp' })
+  use({ 'hrsh7th/nvim-cmp', requires = {
+    'L3MON4D3/LuaSnip',
+  } })
   use({ 'hrsh7th/cmp-buffer' }) -- buffer completions
   use({ 'hrsh7th/cmp-cmdline' }) -- cmdline completions
   use({ 'hrsh7th/cmp-emoji' })
@@ -122,6 +121,10 @@ return packer.startup(function(use)
       })
     end,
   })
+
+  -- Snippets
+  use({ 'L3MON4D3/LuaSnip', wants = 'friendly-snippets' })
+  use({ 'rafamadriz/friendly-snippets' })
 
   -- Telescope
   use({ 'nvim-telescope/telescope.nvim' })
