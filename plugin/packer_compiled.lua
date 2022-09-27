@@ -365,6 +365,11 @@ _G.packer_plugins = {
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
   },
+  ["webapi-vim"] = {
+    loaded = true,
+    path = "/Users/willian/.local/share/nvim/site/pack/packer/start/webapi-vim",
+    url = "https://github.com/mattn/webapi-vim"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/which-key.nvim",
