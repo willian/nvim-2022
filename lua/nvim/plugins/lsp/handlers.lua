@@ -65,7 +65,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', '[e', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
   keymap(bufnr, 'n', ']e', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+  keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', opts)
   keymap(bufnr, 'n', '<leader>li', '<cmd>LspInfo<cr>', opts)
   keymap(bufnr, 'n', '<leader>lM', '<cmd>Mason<cr>', opts)
   keymap(bufnr, 'n', '<leader>la', '<cmd>Lspsaga code_action<cr>', opts)
@@ -86,14 +86,6 @@ M.on_attach = function(client, bufnr)
     end
 
     lsp_inlayhints.on_attach(client, bufnr)
-
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  end
-
-  if client.name == 'sumneko_lua' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
   end
 end
 
@@ -101,7 +93,7 @@ function M.enable_format_on_save()
   vim.cmd([[
     augroup format_on_save
       autocmd! 
-      autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+      autocmd BufWritePre * lua vim.lsp.buf.format()
     augroup end
   ]])
   vim.notify('Enabled format on save')

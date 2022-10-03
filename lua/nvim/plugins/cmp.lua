@@ -74,8 +74,14 @@ cmp.setup({
     ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<m-o>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(
+      cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
+      { 'i', 'c' }
+    ),
+    ['<m-o>'] = cmp.mapping(
+      cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
+      { 'i', 'c' }
+    ),
     ['<C-c>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -154,8 +160,8 @@ cmp.setup({
       -- NOTE: order matters
       vim_item.menu = ({
         copilot = '',
-        nvim_lsp = '',
         luasnip = '',
+        nvim_lsp = '',
         nvim_lua = '',
         buffer = '',
         path = '',
@@ -196,7 +202,9 @@ cmp.setup({
         },
       },
       group_index = 2,
+      priority = 1,
     },
+    { name = 'luasnip', group_index = 2, priority = 2 },
     {
       name = 'nvim_lsp',
       filter = function(entry, ctx)
@@ -210,12 +218,13 @@ cmp.setup({
         end
       end,
       group_index = 2,
+      priority = 3,
     },
-    { name = 'luasnip', group_index = 2 },
-    { name = 'nvim_lua', group_index = 2 },
+    { name = 'nvim_lua', group_index = 2, priority = 3 },
     {
       name = 'buffer',
       group_index = 2,
+      priority = 3,
       ---@diagnostic disable-next-line: unused-local
       filter = function(entry, ctx)
         if not contains(buffer_fts, ctx.prev_context.filetype) then
@@ -223,9 +232,9 @@ cmp.setup({
         end
       end,
     },
-    { name = 'path', group_index = 2 },
-    { name = 'emoji', group_index = 2 },
-    { name = 'lab.quick_data', keyword_length = 4, group_index = 2 },
+    { name = 'path', group_index = 2, priority = 3 },
+    { name = 'emoji', group_index = 2, priority = 3 },
+    { name = 'lab.quick_data', keyword_length = 4, group_index = 2, priority = 3 },
   },
   sorting = {
     priority_weight = 2,

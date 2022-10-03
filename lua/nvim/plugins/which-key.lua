@@ -160,7 +160,7 @@ local mappings = {
     d = { '<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>', 'Diagnostics' },
     D = { '<cmd>Lspsaga show_cursor_diagnostics<cr>', 'Diagnostics' },
     w = { '<cmd>Telescope diagnostics<cr>', 'Diagnostics' },
-    f = { '<cmd>lua vim.lsp.buf.formatting()<cr>', 'Format' },
+    f = { '<cmd>lua vim.lsp.buf.format({ async = true })<cr>', 'Format' },
     i = { '<cmd>LspInfo<cr>', 'Info' },
     I = { '<cmd>LspInstallInfo<cr>', 'Installer Info' },
     j = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Next Diagnostic' },

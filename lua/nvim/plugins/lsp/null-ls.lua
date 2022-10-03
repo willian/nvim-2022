@@ -10,6 +10,19 @@ local code_actions = null_ls.builtins.code_actions
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
 
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    filter = function(client)
+      -- only use null-ls when formatting files
+      return client.name == 'null-ls'
+    end,
+    bufnr = bufnr,
+  })
+end
+
+-- use this as a callback when formatting on save
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
 null_ls.setup({
   debug = false,
   sources = {
@@ -20,16 +33,16 @@ null_ls.setup({
     formatting.stylua,
   },
   ---@diagnostic disable-next-line: unused-local
-  on_attach = function(client, _bufnr)
-    if client.server_capabilities.documentFormattingProvider then
-      vim.cmd('nnoremap <silent><buffer> <Leader>lf :lua vim.lsp.buf.formatting()<CR>')
-
-      -- format on save
-      vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
-    end
-
-    if client.server_capabilities.documentRangeFormattingProvider then
-      vim.cmd('xnoremap <silent><buffer> <Leader>lf :lua vim.lsp.buf.range_formatting({})<CR>')
+  on_attach = function(client, bufnr)
+    if client.supports_method('textDocument/formatting') then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          lsp_formatting(bufnr)
+        end,
+      })
     end
   end,
 })
