@@ -65,7 +65,6 @@ return packer.startup(function(use)
   use({ 'tpope/vim-surround' })
   use({ 'tpope/vim-repeat' })
   -- use({ 'stevearc/dressing.nvim' })
-  -- use({ 'github/copilot.vim' })
 
   -- Colorschemes
   -- use({ 'Julpikar/night-owl.nvim' })
@@ -85,46 +84,42 @@ return packer.startup(function(use)
   -- use({ 'princejoogie/tailwind-highlight.nvim' })
   use({ 'lvimuser/lsp-inlayhints.nvim' })
   -- use('https://git.sr.ht/~whynothugo/lsp_lines.nvim')
-  use({
-    'zbirenbaum/copilot.lua',
-    event = { 'VimEnter' },
-    config = function()
-      vim.defer_fn(function()
-        require('nvim.plugins.copilot')
-      end, 100)
-    end,
-  })
   use({ 'MunifTanjim/prettier.nvim' })
 
   -- Completion
-  use({ 'hrsh7th/nvim-cmp', requires = {
-    'L3MON4D3/LuaSnip',
-  } })
-  use({ 'hrsh7th/cmp-buffer' }) -- buffer completions
-  use({ 'hrsh7th/cmp-cmdline' }) -- cmdline completions
-  use({ 'hrsh7th/cmp-emoji' })
-  use({ 'hrsh7th/cmp-nvim-lsp' })
-  use({ 'hrsh7th/cmp-nvim-lua' })
-  use({ 'hrsh7th/cmp-path' }) -- path completions
-  use({ 'saadparwaiz1/cmp_luasnip' }) -- snippet completions
-  -- use({
-  --   'tzachar/cmp-tabnine',
-  --   commit = '1a8fd2795e4317fd564da269cc64a2fa17ee854e',
-  --   run = './install.sh',
-  -- })
   use({
-    'zbirenbaum/copilot-cmp',
-    after = { 'copilot.lua' },
-    config = function()
-      require('copilot_cmp').setup({
-        method = 'getCompletionsCycling',
-      })
-    end,
+    'hrsh7th/nvim-cmp',
+    requires = {
+      {
+        'zbirenbaum/copilot.lua',
+        event = { 'VimEnter' },
+        config = function()
+          vim.defer_fn(function()
+            require('nvim.plugins.copilot')
+          end, 100)
+        end,
+      },
+      {
+        'zbirenbaum/copilot-cmp',
+        after = { 'copilot.lua' },
+        module = 'copilot_cmp',
+        config = function()
+          require('copilot_cmp').setup({
+            method = 'getCompletionsCycling',
+          })
+        end,
+      },
+      { 'L3MON4D3/LuaSnip', wants = 'friendly-snippets' },
+      { 'rafamadriz/friendly-snippets' },
+      { 'saadparwaiz1/cmp_luasnip' }, -- snippet completions
+      { 'hrsh7th/cmp-buffer' }, -- buffer completions
+      { 'hrsh7th/cmp-cmdline' }, -- cmdline completions
+      { 'hrsh7th/cmp-emoji' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'hrsh7th/cmp-path' }, -- path completions
+    },
   })
-
-  -- Snippets
-  use({ 'L3MON4D3/LuaSnip', wants = 'friendly-snippets' })
-  use({ 'rafamadriz/friendly-snippets' })
 
   -- Telescope
   use({ 'nvim-telescope/telescope.nvim' })
