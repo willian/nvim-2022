@@ -104,7 +104,7 @@ cmp.setup({
     }),
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -174,33 +174,32 @@ cmp.setup({
   sources = {
     {
       name = 'copilot',
-      -- keyword_length = 0,
       max_item_count = 3,
-      trigger_characters = {
-        {
-          '.',
-          ':',
-          '(',
-          "'",
-          '"',
-          '[',
-          ',',
-          '#',
-          '*',
-          '@',
-          '|',
-          '=',
-          '-',
-          '{',
-          '/',
-          '\\',
-          '+',
-          '?',
-          ' ',
-          '\t',
-          '\n',
-        },
-      },
+      -- trigger_characters = {
+      --   {
+      --     '.',
+      --     ':',
+      --     '(',
+      --     "'",
+      --     '"',
+      --     '[',
+      --     ',',
+      --     '#',
+      --     '*',
+      --     '@',
+      --     '|',
+      --     '=',
+      --     '-',
+      --     '{',
+      --     '/',
+      --     '\\',
+      --     '+',
+      --     '?',
+      --     ' ',
+      --     '\t',
+      --     '\n',
+      --   },
+      -- },
       group_index = 2,
       priority = 1,
     },

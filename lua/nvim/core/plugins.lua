@@ -106,7 +106,7 @@ return packer.startup(function(use)
         module = 'copilot_cmp',
         config = function()
           require('copilot_cmp').setup({
-            method = 'getCompletionsCycling',
+            -- method = 'getCompletionsCycling',
           })
         end,
       },
