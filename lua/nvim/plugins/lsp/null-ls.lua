@@ -23,6 +23,7 @@ end
 -- use this as a callback when formatting on save
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
+---@diagnostic disable-next-line: redundant-parameter
 null_ls.setup({
   debug = false,
   sources = {
