@@ -42,7 +42,7 @@ return {
   },
   documents = {
     File = ' ',
-    Files = '',
+    Files = ' ',
     Folder = ' ',
     OpenFolder = ' ',
   },
