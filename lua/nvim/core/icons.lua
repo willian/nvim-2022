@@ -57,8 +57,8 @@ return {
     Repo = ' ',
   },
   ui = {
-    ArrowClosed = '',
-    ArrowOpen = '',
+    ArrowClosed = '',
+    ArrowOpen = '',
     BigCircle = ' ',
     BigUnfilledCircle = ' ',
     BookMark = ' ',
