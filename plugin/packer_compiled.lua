@@ -234,6 +234,11 @@ _G.packer_plugins = {
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
   },
+  ["nvim-transparent"] = {
+    loaded = true,
+    path = "/Users/willian/.local/share/nvim/site/pack/packer/start/nvim-transparent",
+    url = "https://github.com/xiyaowong/nvim-transparent"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/Users/willian/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",

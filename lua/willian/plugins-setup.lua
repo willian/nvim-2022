@@ -57,6 +57,7 @@ return packer.startup(function(use)
   use({ 'nacro90/numb.nvim' }) -- peeks lines of the buffer in non-obtrusive way
   use({ 'folke/todo-comments.nvim' }) -- highlight and search for todo comments like TODO, HACK, BUG
   use({ 'folke/which-key.nvim' }) -- displays a popup with possible key bindings
+  use({ 'xiyaowong/nvim-transparent' }) -- make Neovim transparent
 
   -- commenting with gc
   use({ 'numToStr/Comment.nvim' })
