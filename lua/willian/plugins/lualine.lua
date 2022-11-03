@@ -45,6 +45,7 @@ local filename = {
   'filename',
   color = {},
   cond = nil,
+  path = 1,
 }
 
 local diff = {
