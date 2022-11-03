@@ -40,6 +40,7 @@ return packer.startup(function(use)
 
   -- preferred colorscheme
   use({ 'folke/tokyonight.nvim' })
+  use({ 'bluz71/vim-nightfly-guicolors' })
 
   -- maximizes and restores current window
   use({ 'szw/vim-maximizer' })
