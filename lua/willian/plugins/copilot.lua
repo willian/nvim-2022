@@ -13,5 +13,5 @@ copilot.setup({
     },
   },
   copilot_node_command = vim.fn.expand('$HOME') .. '/.asdf/installs/nodejs/lts/bin/node',
-  plugin_manager_path = vim.fn.stdpath('data') .. '/site/pack/packer',
+  -- plugin_manager_path = vim.fn.stdpath('data') .. '/site/pack/packer',
 })

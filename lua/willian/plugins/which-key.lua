@@ -98,14 +98,6 @@ local mappings = {
     D = { '<cmd>BufferLineSortByDirectory<cr>', 'Sort by directory' },
     L = { '<cmd>BufferLineSortByExtension<cr>', 'Sort by language' },
   },
-  p = {
-    name = 'Packer',
-    c = { '<cmd>PackerCompile<cr>', 'Compile' },
-    i = { '<cmd>PackerInstall<cr>', 'Install' },
-    s = { '<cmd>PackerSync<cr>', 'Sync' },
-    u = { '<cmd>PackerUpdate<cr>', 'Update' },
-    S = { '<cmd>PackerStatus<cr>', 'Status' },
-  },
 
   l = {
     name = 'LSP',

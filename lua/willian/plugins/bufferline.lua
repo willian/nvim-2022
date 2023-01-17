@@ -94,12 +94,6 @@ bufferline.setup({
         text = '',
         padding = 1,
       },
-      {
-        filetype = 'packer',
-        text = 'Packer',
-        highlight = 'PanelHeading',
-        padding = 1,
-      },
     },
     show_buffer_icons = use_icons,
     show_buffer_close_icons = use_icons,

@@ -20,7 +20,7 @@ end
 -- load vs-code like snippets from plugins (e.g. friendly-snippets)
 require('luasnip/loaders/from_vscode').lazy_load({
   paths = {
-    os.getenv('HOME') .. '/.local/share/nvim/site/pack/packer/start/friendly-snippets',
+    os.getenv('HOME') .. '/.local/share/nvim/lazy/friendly-snippets',
     os.getenv('HOME') .. '/.config/nvim/my_snippets',
   },
 })

@@ -1,7 +1,6 @@
 vim.g.Illuminate_ftblacklist = {
   'alpha',
   'NvimTree',
-  'packer',
   'toggleterm',
   'DressingSelect',
   'TelescopePrompt',

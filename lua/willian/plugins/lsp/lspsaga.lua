@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-saga.init_lsp_saga({
+saga.setup({
   -- keybinds for navigation in lspsaga window
   move_in_saga = { prev = '<Up>', next = '<Down>' },
   -- use enter to open file with finder

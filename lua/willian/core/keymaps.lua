@@ -100,13 +100,6 @@ keymap('c', 'X', 'x', opts)
 -- Plugin Keybinds
 ----------------------
 
--- packer
-keymap('n', '<leader>pc', '<CMD>PackerCompile<CR>', opts)
-keymap('n', '<leader>pi', '<CMD>PackerInstall<CR>', opts)
-keymap('n', '<leader>ps', '<CMD>PackerSync<CR>', opts)
-keymap('n', '<leader>pS', '<CMD>PackerStatus<CR>', opts)
-keymap('n', '<leader>pu', '<CMD>PackerUpdate<CR>', opts)
-
 -- vim-maximizer
 keymap('n', '<leader>sm', ':MaximizerToggle<CR>', opts) -- toggle split window maximization
 

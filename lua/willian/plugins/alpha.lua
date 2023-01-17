@@ -34,7 +34,7 @@ dashboard.section.buttons.val = {
   button('p', '  Find project', ':Telescope projects<CR>'),
   button('r', '  Recent files', ':Telescope oldfiles<CR>'),
   button('s', '  Find text', ':Telescope live_grep<CR>'),
-  button('u', '  Update', ':PackerSync<CR>'),
+  button('u', '  Update', ':Lazy update<CR>'),
   button('c', '  Config', ':e ~/.config/nvim/init.lua <CR>'),
   button('q', '  Quit', ':qa<CR>'),
 }

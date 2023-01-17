@@ -15,7 +15,6 @@ indent_blankline.setup({
     'help',
     'alpha',
     'NvimTree',
-    'packer',
     'toggleterm',
     'DressingSelect',
     'TelescopePrompt',
