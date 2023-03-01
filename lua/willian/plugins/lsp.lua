@@ -11,7 +11,7 @@ return {
     {
       'williamboman/mason.nvim',
       keys = {
-        { '<leader>lM', '<cmd>Mason<cr>',   desc = 'Open Mason' },
+        { '<leader>lM', '<cmd>Mason<cr>', desc = 'Open Mason' },
         { '<leader>li', '<cmd>LspInfo<cr>', desc = 'LSP Info' },
       },
     },
@@ -62,6 +62,13 @@ return {
     { 'jose-elias-alvarez/typescript.nvim', lazy = true },
 
     -- Better UI
+
+    -- nvim-lsp progress_as
+    {
+      'j-hui/fidget.nvim',
+      config = true,
+    },
+
     { 'onsails/lspkind.nvim' }, -- vs-code like icons for autocompletion
 
     {
@@ -71,6 +78,34 @@ return {
         { 'nvim-tree/nvim-web-devicons' },
       },
       config = true,
+    },
+
+    -- formatting & linting
+    {
+      'jose-elias-alvarez/null-ls.nvim',
+      dependencies = {
+        'jayp0521/mason-null-ls.nvim', -- bridges gap b/w mason & null-ls
+      },
+    },
+
+    {
+      'MunifTanjim/prettier.nvim',
+      opts = {
+        bin = 'prettierd',
+        cli_options = {
+          arrow_parens = 'avoid',
+          bracket_spacing = false,
+          jsx_bracket_same_line = false,
+          print_width = 100,
+          prose_wrap = 'always',
+          require_config = true,
+          semi = false,
+          single_quote = true,
+          tab_width = 2,
+          trailing_comma = 'all',
+          use_tabs = false,
+        },
+      },
     },
   },
   config = function()
@@ -187,5 +222,42 @@ return {
     lsp.nvim_workspace()
 
     lsp.setup()
+
+    local null_ls = require('null-ls')
+    local null_opts = lsp.build_options('null-ls', {})
+
+    local eslint_d_settings = {
+      -- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
+      condition = function(utils)
+        -- change file extension if you use something else
+        return utils.root_has_file('.eslintrc.js') or utils.root_has_file('.eslintrc.json')
+      end,
+    }
+
+    null_ls.setup({
+      on_attach = null_opts.on_attach,
+      -- setup formatters & linters
+      sources = {
+        null_ls.builtins.formatting.stylua, -- lua formatter
+        -- null_ls.builtins.code_actions.eslint_d,
+        null_ls.builtins.diagnostics.eslint_d.with(eslint_d_settings), -- js/ts linter
+        -- null_ls.builtins.formatting.eslint_d.with(eslint_d_settings),
+        -- null_ls.builtins.completion.spell,
+        null_ls.builtins.formatting.prettierd, -- js/ts formatter
+      },
+    })
+
+    local mason_null_ls = require('mason-null-ls')
+
+    mason_null_ls.setup({
+      -- list of formatters & linters for mason to install
+      ensure_installed = {
+        'eslint_d', -- ts/js linter
+        'prettierd', -- ts/js formatter
+        'stylua', -- lua formatter
+      },
+      -- auto-install configured formatters & linters (with null-ls)
+      automatic_installation = true,
+    })
   end,
 }
