@@ -11,8 +11,8 @@ return {
     {
       'williamboman/mason.nvim',
       keys = {
-        { '<leader>lM', '<cmd>Mason<cr>', desc = 'Open Mason' },
-        { '<leader>li', '<cmd>LspInfo<cr>', desc = 'LSP Info' },
+        { '<leader>lM', '<cmd>Mason<cr>', desc = 'LSP: Open Mason' },
+        { '<leader>li', '<cmd>LspInfo<cr>', desc = 'LSP: Info' },
       },
     },
     { 'williamboman/mason-lspconfig.nvim' },
@@ -159,27 +159,27 @@ return {
       end
 
       -- set keybinds
-      nmap('gf', '<cmd>Lspsaga lsp_finder<CR>') -- show definition, references
-      nmap('gD', vim.lsp.buf.declaration) -- got to declaration
-      nmap('gd', '<cmd>Lspsaga goto_definition<CR>') -- see definition and make edits in window
-      nmap('gi', vim.lsp.buf.implementation) -- go to implementation
-      nmap('[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>') -- jump to previous diagnostic in buffer
-      nmap(']e', '<cmd>Lspsaga diagnostic_jump_next<CR>') -- jump to next diagnostic in buffer
-      nmap('K', '<cmd>Lspsaga hover_doc<CR>') -- show documentation for what is under cursor
-      nmap('<leader>D', '<cmd>Lspsaga show_cursor_diagnostics<CR>') -- show diagnostics for cursor
-      nmap('<leader>d', '<cmd>Lspsaga show_line_diagnostics<CR>') -- show  diagnostics for line
-      nmap('<leader>ca', '<cmd>Lspsaga code_action<CR>') -- see available code actions
-      nmap('<leader>lD', '<cmd>Lspsaga show_cursor_diagnostics<CR>') -- show diagnostics for cursor
-      nmap('<leader>la', '<cmd>Lspsaga code_action<CR>')
-      nmap('<leader>ld', '<cmd>Lspsaga show_line_diagnostics<CR>') -- show  diagnostics for line
-      nmap('<leader>lr', '<cmd>Lspsaga rename<CR>')
-      nmap('<leader>rn', '<cmd>Lspsaga rename<CR>')
+      nmap('gf', '<cmd>Lspsaga lsp_finder<CR>', 'References') -- show definition, references
+      nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration') -- got to declaration
+      nmap('gd', '<cmd>Lspsaga goto_definition<CR>', 'Goto Definition') -- see definition and make edits in window
+      nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation') -- go to implementation
+      nmap('[e', '<cmd>Lspsaga diagnostic_jump_prev<CR>', 'Next Error') -- jump to previous diagnostic in buffer
+      nmap(']e', '<cmd>Lspsaga diagnostic_jump_next<CR>', 'Prev Error') -- jump to next diagnostic in buffer
+      nmap('K', '<cmd>Lspsaga hover_doc<CR>', 'Show documentation') -- show documentation for what is under cursor
+      nmap('<leader>D', '<cmd>Lspsaga show_cursor_diagnostics<CR>', 'Cursor Diagnostic') -- show diagnostics for cursor
+      nmap('<leader>d', '<cmd>Lspsaga show_line_diagnostics<CR>', 'Line Diagnostics') -- show  diagnostics for line
+      nmap('<leader>ca', '<cmd>Lspsaga code_action<CR>', 'Code Action') -- see available code actions
+      nmap('<leader>cr', '<cmd>Lspsaga rename<CR>', 'Rename')
+      nmap('<leader>lD', '<cmd>Lspsaga show_cursor_diagnostics<CR>', 'Cursor Diagnostic') -- show diagnostics for cursor
+      nmap('<leader>la', '<cmd>Lspsaga code_action<CR>', 'Code Action')
+      nmap('<leader>ld', '<cmd>Lspsaga show_line_diagnostics<CR>', 'Line Diagnostics') -- show  diagnostics for line
+      nmap('<leader>lr', '<cmd>Lspsaga rename<CR>', 'Rename')
 
       -- typescript specific keymaps (e.g. rename file and update imports)
       if client.name == 'tsserver' then
-        nmap('<leader>rf', ':TypescriptRenameFile<CR>') -- rename file and update imports
-        nmap('<leader>oi', ':TypescriptOrganizeImports<CR>') -- organize imports (not in youtube nvim video)
-        nmap('<leader>ru', ':TypescriptRemoveUnused<CR>') -- remove unused variables (not in youtube nvim video)
+        nmap('<leader>rf', ':TypescriptRenameFile<CR>', '[TS] Rename File') -- rename file and update imports
+        nmap('<leader>oi', ':TypescriptOrganizeImports<CR>', '[TS] Organize Imports') -- organize imports (not in youtube nvim video)
+        nmap('<leader>ru', ':TypescriptRemoveUnused<CR>', '[TS] Remove Unused') -- remove unused variables (not in youtube nvim video)
       end
     end
 
