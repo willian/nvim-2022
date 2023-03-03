@@ -35,8 +35,8 @@ map('n', '<leader>se', '<C-w>=', { desc = 'make split windows equal width & heig
 map('n', '<leader>sq', ':close<CR>', { desc = 'close current split window' })
 
 -- buffers navigation
--- map('n', '<S-l>', ':bnext<CR>', { desc = 'Next buffer' })
--- map('n', '<S-h>', ':bprevious<CR>', { desc = 'Prev buffer' })
+map('n', '<S-l>', ':bnext<CR>', { desc = 'Next buffer' })
+map('n', '<S-h>', ':bprevious<CR>', { desc = 'Prev buffer' })
 map('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 map('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 
@@ -101,7 +101,7 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- lazy
-map('n', '<leader>l', '<cmd>:Lazy<cr>', { desc = 'Lazy' })
+map('n', '<leader>L', '<cmd>:Lazy<cr>', { desc = 'Lazy' })
 
 -- new file
 map('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
