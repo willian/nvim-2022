@@ -30,6 +30,8 @@ return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     keys = {
+      { '<S-h>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
+      { '<S-l>', '<cmd>BufferLineCycleNext<cr>', desc = 'Next buffer' },
       { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>', desc = 'Toggle pin' },
       {
         '<leader>bP',
@@ -37,26 +39,116 @@ return {
         desc = 'Delete non-pinned buffers',
       },
     },
-    opts = {
-      options = {
-        diagnostics = 'nvim_lsp',
-        always_show_bufferline = true,
-        diagnostics_indicator = function(_, _, diag)
-          local icons = require('lazyvim.config').icons.diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
-            .. (diag.warning and icons.Warn .. diag.warning or '')
-          return vim.trim(ret)
-        end,
-        offsets = {
-          {
-            filetype = 'neo-tree',
-            text = 'Neo-tree',
-            highlight = 'Directory',
-            text_align = 'left',
+    opts = function()
+      local use_icons = true
+
+      local function is_ft(b, ft)
+        return vim.bo[b].filetype == ft
+      end
+
+      local function diagnostics_indicator(num, _, diagnostics, _)
+        local table_result = {}
+        local result = ''
+        local symbols = {
+          error = ' ',
+          hint = ' ',
+          info = ' ',
+          warning = ' ',
+        }
+
+        if not use_icons then
+          return '(' .. num .. ')'
+        end
+
+        for name, count in pairs(diagnostics) do
+          if symbols[name] and count > 0 then
+            table.insert(table_result, symbols[name] .. ' ' .. count)
+          end
+        end
+
+        result = table.concat(table_result, ' ')
+
+        return #result > 0 and result or ''
+      end
+
+      local function custom_filter(buf, buf_nums)
+        local logs = vim.tbl_filter(function(b)
+          return is_ft(b, 'log')
+        end, buf_nums)
+
+        if vim.tbl_isempty(logs) then
+          return true
+        end
+
+        local tab_num = vim.fn.tabpagenr()
+        local last_tab = vim.fn.tabpagenr('$')
+        local is_log = is_ft(buf, 'log')
+
+        if last_tab == 1 then
+          return true
+        end
+
+        -- only show log buffers in secondary tabstop
+        return (tab_num == last_tab and is_log) or (tab_num ~= last_tab and not is_log)
+      end
+
+      return {
+        options = {
+          always_show_bufferline = true,
+          buffer_close_icon = ' ',
+          close_command = 'Bdelete! %d',
+          close_icon = ' ',
+          custom_filter = custom_filter, -- NOTE: this will be called a lot so don't do any heavy processing here
+          diagnostics = 'nvim_lsp',
+          diagnostics_update_in_insert = false,
+          diagnostics_indicator = diagnostics_indicator,
+          enforce_regular_tabs = true,
+          hover = {
+            enabled = true,
+            delay = 200,
+            reveal = { 'close' },
+          },
+          indicator = { icon = '▎', style = 'icon' },
+          left_mouse_command = 'buffer %d',
+          left_trunc_marker = ' ',
+          max_name_length = 30,
+          max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
+          middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+          modified_icon = '● ',
+          numbers = 'none',
+          offsets = {
+            {
+              filetype = 'NvimTree',
+              text = '',
+              padding = 1,
+            },
+            {
+              filetype = 'neo-tree',
+              text = 'Neo-tree',
+              highlight = 'Directory',
+              text_align = 'left',
+            },
+          },
+          persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+          right_mouse_command = 'Bdelete! %d',
+          right_trunc_marker = ' ',
+          separator_style = 'thin',
+          show_buffer_close_icons = use_icons,
+          show_buffer_icons = use_icons,
+          show_close_icon = false,
+          show_tab_indicators = true,
+          tab_size = 21,
+        },
+        highlights = {
+          background = {
+            italic = true,
+          },
+          buffer_selected = {
+            bold = true,
           },
         },
-      },
-    },
+      }
+    end,
   },
 
   -- statusline
