@@ -116,6 +116,9 @@ return {
 
   {
     'nvim-telescope/telescope.nvim',
+    dependencies = {
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    },
     cmd = 'Telescope',
     version = false, -- telescope did only one release, so use HEAD for now
     keys = {
