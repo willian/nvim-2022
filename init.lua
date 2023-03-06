@@ -1,34 +1,28 @@
-require('willian.plugins-setup')
+-- Set <space> as the leader key
+-- See 
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.keymap.set('', '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-require('willian.core.options')
-require('willian.core.keymaps')
-require('willian.core.colorscheme')
+-- Use lazy.nvim a the package manager
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-require('willian.plugins.comment')
-require('willian.plugins.nvim-tree')
-require('willian.plugins.lualine')
-require('willian.plugins.telescope')
-require('willian.plugins.nvim-cmp')
-require('willian.plugins.lsp.mason')
-require('willian.plugins.lsp.lspsaga')
-require('willian.plugins.lsp.lspconfig')
-require('willian.plugins.lsp.null-ls')
-require('willian.plugins.autopairs')
-require('willian.plugins.treesitter')
-require('willian.plugins.gitsigns')
-require('willian.plugins.alpha')
-require('willian.plugins.indent_blankline')
-require('willian.plugins.bufferline')
-require('willian.plugins.colorizer')
-require('willian.plugins.toggleterm')
-require('willian.plugins.fidget')
-require('willian.plugins.illuminate')
-require('willian.plugins.leap')
-require('willian.plugins.git-blame')
-require('willian.plugins.project')
-require('willian.plugins.notify')
-require('willian.plugins.numb')
-require('willian.plugins.prettier')
-require('willian.plugins.todo-comments')
-require('willian.plugins.transparent')
-require('willian.plugins.which-key')
+-- Initialize lazy.nvim
+require('lazy').setup('willian.plugins', {})
+
+-- Custom configurations
+require('willian.options')
+require('willian.keymaps')
+require('willian.autocmds')
