@@ -21,6 +21,7 @@ return {
       end,
     },
     init = function()
+      vim.opt.termguicolors = true -- turn on termguicolors for the colorscheme to work
       vim.notify = require('notify')
     end,
   },
