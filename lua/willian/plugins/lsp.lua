@@ -21,6 +21,9 @@ return {
       -- formatting & linting
       'jose-elias-alvarez/null-ls.nvim', -- configure formatters & linters
       'jayp0521/mason-null-ls.nvim', -- bridges gap b/w mason & null-ls
+
+      -- tailwindcss color in autocompletion
+      { 'roobert/tailwindcss-colorizer-cmp.nvim', config = true },
     },
     config = function()
       local cmp = require('cmp')
@@ -88,10 +91,13 @@ return {
 
         -- configure lspkind for vs-code like icons
         formatting = {
-          format = lspkind.cmp_format({
-            maxwidth = 50,
-            ellipsis_char = '...',
-          }),
+          format = function(entry, item)
+            lspkind.cmp_format({
+              maxwidth = 50,
+              ellipsis_char = '...',
+            })(entry, item)
+            return require('tailwindcss-colorizer-cmp').formatter(entry, item)
+          end,
         },
       })
     end,
