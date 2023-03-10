@@ -1,0 +1,169 @@
+{
+  "console.log": {
+    "prefix": "cl",
+    "body": "console.log(${1:'here'})$0"
+  },
+  "console.log('var', var)": {
+    "prefix": "vl",
+    "body": "console.log('$1', $1)$0"
+  },
+  "spaced console.log": {
+    "prefix": "scl",
+    "body": [
+      "console.log('**************************************************')",
+      "console.log($0)",
+      "console.log('**************************************************\\\\n\\\\n\\\\n')"
+    ]
+  },
+  "console.log({var})": {
+    "prefix": "ol",
+    "body": "console.log({$1})$0"
+  },
+  "Debugger": {
+    "prefix": "dbgr",
+    "body": "debugger // eslint-disable-line"
+  },
+  "import x from 'x'": {
+    "prefix": "imp",
+    "body": "import ${2:*} from '$1'$3"
+  },
+  "import React from 'react'": {
+    "prefix": "impr",
+    "body": ["import React from 'react'", "$0"]
+  },
+  "eslint rule": {
+    "prefix": "esl",
+    "body": "/* eslint $1:0 */"
+  },
+  "eslint disable next line": {
+    "prefix": "eslnl",
+    "body": "// eslint-disable-next-line $1"
+  },
+  "eslint disable line": {
+    "prefix": "esll",
+    "body": "// eslint-disable-line $1"
+  },
+  "constructor": {
+    "prefix": "ctor",
+    "body": ["constructor(...args) {", "  super(...args)", "  $0", "}"]
+  },
+  "try/catch": {
+    "prefix": "try",
+    "body": ["try {", "  $1", "} catch (error) {", "  $0", "}"]
+  },
+  "async function": {
+    "prefix": "afun",
+    "body": ["async function $1($2) {", "  $0", "}"]
+  },
+  "throw log": {
+    "prefix": "tl",
+    "body": "throw new Error(JSON.stringify({$0}, null, 2))"
+  },
+  "Switch Statement": {
+    "prefix": "switch",
+    "body": [
+      "switch (${1:key}) {",
+      "  case ${2:value}: {",
+      "    $0",
+      "    break",
+      "  }",
+      "  default: {",
+      "    break",
+      "  }",
+      "}"
+    ]
+  },
+  "Reducer": {
+    "prefix": "reducer",
+    "body": [
+      "function ${1:someReducer}(state, action) {",
+      "  switch (action.type) {",
+      "    case ${2:'value'}: {",
+      "      return $0",
+      "    }",
+      "    default: {",
+      "      throw new Error(`Unhandled action type: ${action.type}`)",
+      "    }",
+      "  }",
+      "}"
+    ]
+  },
+  "Switch case": {
+    "prefix": "case",
+    "body": ["case ${2:'value'}: {", "  return $0", "}"]
+  },
+  "React.useState": {
+    "prefix": "us",
+    "body": ["const [${1:state}, ${2:setState}] = React.useState($3)$0"]
+  },
+  "React.useEffect": {
+    "prefix": "uf",
+    "body": ["React.useEffect(() => {", "  $0", "}, [])"]
+  },
+  "React.useReducer": {
+    "prefix": "ur",
+    "body": [
+      "const [state, dispatch] = React.useReducer(${1:someReducer}, {",
+      "  $0",
+      "})"
+    ]
+  },
+  "React.useRef": {
+    "prefix": "urf",
+    "body": ["const ${1:someRef} = React.useRef($2)$0"]
+  },
+  "React Component": {
+    "prefix": "rc",
+    "body": [
+      "class $1 extends React.Component {",
+      "  render() {",
+      "    $0",
+      "  }",
+      "}"
+    ]
+  },
+  "React: componentWillMount": {
+    "prefix": "cwm",
+    "body": ["componentWillMount() {", "  $0", "}"]
+  },
+  "React: componentDidMount": {
+    "prefix": "cdm",
+    "body": ["componentDidMount() {", "  $0", "}"]
+  },
+  "React: componentWillReceiveProps": {
+    "prefix": "cwrp",
+    "body": ["componentWillReceiveProps(nextProps) {", "  $0", "}"]
+  },
+  "React: componentWillUpdate": {
+    "prefix": "cwu",
+    "body": ["componentWillUpdate(nextProps, nextState) {", "  $0", "}"]
+  },
+  "React: componentDidUpdate": {
+    "prefix": "cdu",
+    "body": ["componentDidUpdate(prevProps, prevState) {", "  $0", "}"]
+  },
+  "React: componentWillUnmount": {
+    "prefix": "cwu",
+    "body": ["componentWillUnmount() {", "  $0", "}"]
+  },
+  "React: function": {
+    "prefix": "rfc",
+    "body": ["export default function $1($2) {", "  $0", "}"]
+  },
+  "Jest test": {
+    "prefix": "test",
+    "body": ["test('$1', () => {", "  $0", "})"]
+  },
+  "Jest async test": {
+    "prefix": "atest",
+    "body": ["test('$1', async () => {", "  $0", "})"]
+  },
+  "Mocha it block": {
+    "prefix": "it",
+    "body": ["it('$1', () => {", "  $2", "})"]
+  },
+  "Mocha describe block": {
+    "prefix": "desc",
+    "body": ["describe('$1', () => {", "  $2", "})"]
+  }
+}
