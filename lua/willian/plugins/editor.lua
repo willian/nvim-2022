@@ -335,6 +335,7 @@ return {
     },
     opts = {
       defaults = {
+        file_ignore_patterns = { '.git/', 'node_modules' },
         prompt_prefix = ' ',
         selection_caret = ' ',
         mappings = {
@@ -605,6 +606,7 @@ return {
   -- persist and toggle multiple terminals during an editing session
   {
     'akinsho/toggleterm.nvim',
+    lazy = false,
     keys = {
       { '<leader>t1', '<cmd>1ToggleTerm<CR>', desc = 'Toggle terminal #1' },
       { '<leader>t2', '<cmd>2ToggleTerm<CR>', desc = 'Toggle terminal #2' },
