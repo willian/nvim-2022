@@ -290,6 +290,7 @@ return {
                     return client.name == 'null-ls'
                   end,
                   bufnr = bufnr,
+                  timeout_ms = 3000,
                 })
               end,
             })
