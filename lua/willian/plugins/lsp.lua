@@ -116,7 +116,7 @@ return {
       'glepnir/lspsaga.nvim', -- enhanced lsp uis
       'jose-elias-alvarez/typescript.nvim', -- additional functionality for typescript server (e.g. rename file & update imports)
       -- 'j-hui/fidget.nvim', -- UI for nvim-lsp progress
-      -- 'MunifTanjim/prettier.nvim', -- prettier plugin
+      'MunifTanjim/prettier.nvim', -- prettier plugin
     },
     config = function()
       local lsp_servers = {
@@ -296,6 +296,25 @@ return {
             })
           end
         end,
+      })
+
+      local prettier = require('prettier')
+
+      prettier.setup({
+        bin = 'prettierd',
+        cli_options = {
+          arrow_parens = 'avoid',
+          bracket_spacing = false,
+          jsx_bracket_same_line = false,
+          print_width = 100,
+          prose_wrap = 'always',
+          require_config = true,
+          semi = false,
+          single_quote = true,
+          tab_width = 2,
+          trailing_comma = 'all',
+          use_tabs = false,
+        },
       })
     end,
   },
