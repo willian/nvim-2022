@@ -31,7 +31,12 @@ return {
       local lspkind = require('lspkind')
 
       -- load friendly-snippets
-      require('luasnip.loaders.from_vscode').lazy_load()
+      require('luasnip.loaders.from_vscode').lazy_load({
+        paths = {
+          os.getenv('HOME') .. '/.local/share/nvim/lazy/friendly-snippets',
+          os.getenv('HOME') .. '/.config/nvim/my_snippets',
+        },
+      })
 
       -- helper function for super tab functionality
       local has_words_before = function()
