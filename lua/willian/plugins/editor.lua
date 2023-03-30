@@ -681,4 +681,10 @@ return {
       end
     end,
   },
+
+  -- Panes navigation
+  {
+    'christoomey/vim-tmux-navigator',
+    event = { 'BufReadPre', 'BufNewFile' },
+  },
 }
