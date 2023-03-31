@@ -24,11 +24,35 @@ return {
 
       -- tailwindcss color in autocompletion
       { 'roobert/tailwindcss-colorizer-cmp.nvim', config = true },
+
+      -- copilot
+      {
+        'zbirenbaum/copilot.lua',
+        event = { 'VimEnter' },
+        dependencies = { 'zbirenbaum/copilot-cmp', config = true },
+        opts = {
+          server_opts_overrides = {
+            settings = {
+              advanced = {},
+              inlineSuggestCount = 3, -- #completions for getCompletions
+            },
+          },
+          copilot_node_command = vim.fn.expand('$HOME') .. '/.asdf/installs/nodejs/lts/bin/node',
+        },
+      },
     },
     config = function()
       local cmp = require('cmp')
       local luasnip = require('luasnip')
       local lspkind = require('lspkind')
+
+      lspkind.init({
+        symbol_map = {
+          Copilot = '',
+        },
+      })
+
+      vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#9ECE6A' })
 
       -- load friendly-snippets
       require('luasnip.loaders.from_vscode').lazy_load({
@@ -88,6 +112,7 @@ return {
 
         -- sources for autocompletion
         sources = cmp.config.sources({
+          { name = 'copilot' }, -- lsp
           { name = 'nvim_lsp' }, -- lsp
           { name = 'luasnip' }, -- snippets
           { name = 'buffer' }, -- text within current buffer
