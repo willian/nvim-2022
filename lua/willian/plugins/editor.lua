@@ -622,7 +622,7 @@ return {
     },
     opts = {
       size = 20,
-      open_mapping = [[<C-\>]],
+      open_mapping = [[\\]],
       hide_numbers = true,
       shade_filetypes = {},
       shade_terminals = true,
